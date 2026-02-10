@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$SLUSH | Radioactive Rocket Fuel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff00ff; /* Kept for accents */
+            --neon-blue: #00ffff; /* Kept for accents */
+            --acid-green: #ccff00; /* New Slushie Color */
+            --toxic-green: #00ff00;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(204, 255, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(204, 255, 0, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Nav --- */
+        .top-nav {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .back-link {
+            color: var(--acid-green);
+            text-decoration: none;
+            font-size: 0.7rem;
+            border: 2px solid var(--acid-green);
+            padding: 10px;
+            display: inline-block;
+        }
+
+        .back-link:hover {
+            background: var(--acid-green);
+            color: #000;
+            box-shadow: 0 0 10px var(--acid-green);
+        }
+
+        /* --- Hero --- */
+        .hero-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 1.5;
+            text-shadow: 4px 4px 0px var(--toxic-green);
+            margin-top: 20px;
+            animation: melt 2s infinite alternate;
+        }
+
+        .tickers {
+            color: var(--acid-green);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            display: block;
+            text-shadow: 0 0 10px var(--acid-green);
+        }
+
+        /* --- Image --- */
+        .hero-img-container {
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        .product-img {
+            max-width: 300px;
+            height: auto;
+            /* Toxic Glow Effect */
+            box-shadow: 
+                6px 6px 0px var(--acid-green), 
+                -6px -6px 0px var(--toxic-green);
+            animation: shakeGlitch 0.3s infinite alternate;
+            image-rendering: pixelated;
+        }
+
+        /* --- Content Box --- */
+        .content-box {
+            background: var(--card-bg);
+            border: 2px solid var(--toxic-green);
+            padding: 40px;
+            margin: 0 auto 40px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 10px 10px 0px rgba(204, 255, 0, 0.2);
+            position: relative;
+        }
+
+        .content-box::before {
+            content: "INGREDIENTS";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--toxic-green);
+            color: #000;
+            padding: 5px 10px;
+            font-size: 0.6rem;
+        }
+
+        .story-text {
+            font-size: 0.8rem;
+            line-height: 2;
+            color: #ccc;
+            text-align: justify;
+        }
+
+        .story-text strong {
+            color: var(--acid-green);
+        }
+
+        /* --- Warning Box --- */
+        .warning-box {
+            border: 2px dashed var(--acid-green);
+            padding: 20px;
+            margin-top: 30px;
+            background: rgba(204, 255, 0, 0.05);
+        }
+
+        .warning-title {
+            color: var(--acid-green);
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* --- Big Launch Button --- */
+        .launch-container {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+        }
+
+        .launch-btn {
+            background: var(--toxic-green);
+            color: #000;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            padding: 30px 50px;
+            border: none;
+            cursor: not-allowed;
+            box-shadow: 8px 8px 0px var(--acid-green);
+            animation: pulseBig 2s infinite ease-in-out;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: auto;
+            background: #000;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.5rem;
+            color: #666;
+            border-top: 2px solid #333;
+        }
+
+        /* --- Animations --- */
+        @keyframes shakeGlitch {
+            0% { transform: translate(0); box-shadow: 6px 6px 0px var(--acid-green), -6px -6px 0px var(--toxic-green); }
+            25% { transform: translate(-2px, 1px); box-shadow: -6px -6px 0px var(--acid-green), 6px 6px 0px var(--toxic-green); }
+            50% { transform: translate(2px, -1px); }
+            75% { transform: translate(-1px, 2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes pulseBig {
+            0% { transform: scale(1); box-shadow: 8px 8px 0px var(--acid-green); }
+            50% { transform: scale(1.05); box-shadow: 12px 12px 0px var(--acid-green), 0 0 20px var(--toxic-green); }
+            100% { transform: scale(1); box-shadow: 8px 8px 0px var(--acid-green); }
+        }
+
+        @keyframes melt {
+            0% { text-shadow: 4px 4px 0px var(--toxic-green); }
+            100% { text-shadow: 6px 6px 0px var(--acid-green); }
+        }
+
+        /* Mobile tweaks */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.2rem; }
+            .product-img { max-width: 200px; }
+            .launch-btn { font-size: 1rem; padding: 20px 30px; }
+            .content-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="index.html" class="back-link">⬅ BACK TO META MART</a>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-img-container">
+            <img src="https://i.imgur.com/ZNZDbwY.png" alt="Slushie" class="product-img">
+        </div>
+        
+        <h1>RADIOACTIVE SLUSHIE</h1>
+        <span class="tickers">$SLUSH</span>
+    </section>
+
+    <div class="content-box">
+        <div class="story-text">
+            <p>It’s 3 AM. You’ve been staring at charts for 14 hours. You need a wakeup call, but coffee is for boomers. You need something that glows in the dark and makes your teeth hurt.</p>
+            <br>
+            <p>Introducing <strong>$SLUSH</strong>, the official beverage of the Meta Mart. We found this leaking out of the back of the delivery truck, and honestly? It tastes like battery acid mixed with Blue Raspberry. It’s Radioactive Slushie, and it’s ready to mutate your portfolio.</p>
+            
+            <div class="warning-box">
+                <span class="warning-title">⚠️ WARNING: MAY CONTAIN AMPHETAMEMES</span>
+                <p style="margin:0; font-size: 0.7rem;">The clerk told us not to sell this to humans. He said it causes "temporary godhood" and "permanent dialysis." We didn't listen. We put it on the shelf right next to the GSDP.</p>
+            </div>
+
+            <br>
+            <p>The brain freeze is temporary. The <strong>generational wealth</strong> is forever. Are you going to stand there and let the ice melt, or are you going to chug the whole cup?</p>
+        </div>
+    </div>
+
+    <div class="launch-container">
+        <button class="launch-btn">POURING SOON!</button>
+        <p style="margin-top: 15px; font-size: 0.6rem; color: var(--acid-green);">FREEZER IS CURRENTLY SET TO: DEEP SPACE</p>
+    </div>
+
+    <footer>
+        <p>META MART INTERGALACTIC INC.</p>
+        <p>DRINK ME. GET IRRADIATED.</p>
+    </footer>
+
+</body>
+</html>
