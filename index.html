@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>META MART | Open 24/7</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-blue: #00ffff;
+            --neon-green: #00ff00;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* --- Header & Nav --- */
+        header {
+            background: #000;
+            border-bottom: 4px solid var(--neon-pink);
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--neon-blue);
+            text-shadow: 4px 4px var(--neon-pink);
+            margin-bottom: 15px;
+            animation: glitch 1s infinite alternate;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.8rem;
+            padding: 10px;
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        #connect-wallet {
+            border: 2px solid var(--neon-green);
+            color: var(--neon-green);
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .cta-btn {
+            background: var(--neon-pink);
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.7rem;
+            margin-top: 10px;
+            box-shadow: 4px 4px 0px #fff;
+            transition: transform 0.1s;
+        }
+
+        .cta-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #fff;
+        }
+
+        /* --- Marquee --- */
+        .marquee {
+            background: var(--neon-green);
+            color: #000;
+            padding: 10px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            border-bottom: 2px solid #fff;
+            font-size: 0.8rem;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 15s linear infinite;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle, #2a002a 0%, #000 70%);
+        }
+
+        .hero h1 {
+            font-size: 1.5rem;
+            line-height: 1.5;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .hero span {
+            color: var(--neon-blue);
+        }
+
+        /* --- Featured Product ($GSDP) --- */
+        .featured-section {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--neon-pink);
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 0 #fff;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 4px solid var(--neon-blue);
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 10px 10px 0px rgba(0, 255, 255, 0.2);
+        }
+
+        .product-image {
+            flex: 1 1 300px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* --- REAL IMAGE ANIMATION STYLE --- */
+        .product-img {
+            display: inline-block;
+            max-width: 100%;
+            height: auto;
+            /* The Double Image/Shadow Effect */
+            box-shadow: 
+                5px 5px 0px var(--neon-pink), 
+                -5px -5px 0px var(--neon-blue);
+            animation: shakeGlitch 0.3s infinite alternate;
+            image-rendering: pixelated; /* Keeps art crisp */
+            background: transparent;
+        }
+        
+        /* Featured image is larger */
+        .featured-section .product-img {
+            max-width: 250px;
+        }
+
+        /* Grid card images are smaller */
+        .mini-card .product-img {
+            max-width: 150px;
+            height: 150px;
+            object-fit: contain;
+        }
+
+        .product-details {
+            flex: 1 1 400px;
+            padding: 20px;
+        }
+
+        .badge {
+            background: var(--neon-green);
+            color: #000;
+            padding: 5px 10px;
+            font-size: 0.6rem;
+            display: inline-block;
+            margin-bottom: 10px;
+            animation: pulse 1s infinite;
+        }
+
+        .product-name {
+            font-size: 1.8rem;
+            color: #fff;
+            margin: 0 0 20px 0;
+            line-height: 1.2;
+        }
+
+        .product-desc {
+            font-size: 0.7rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .price-tag {
+            font-size: 1.2rem;
+            color: var(--neon-pink);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .buy-btn {
+            background: var(--neon-blue);
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 5px 5px 0px var(--neon-pink);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .buy-btn:hover {
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* --- Other Items Grid --- */
+        .aisles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mini-card {
+            background: var(--card-bg);
+            border: 2px solid #333;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .mini-card:hover {
+            border-color: var(--neon-green);
+            transform: translateY(-5px);
+        }
+
+        .mini-card h3 {
+            color: var(--neon-blue);
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #000;
+            border-top: 4px solid var(--neon-green);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.6rem;
+            color: #666;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        .socials a {
+            color: var(--neon-pink);
+            margin: 0 10px;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        /* --- Modal (Wallet Gag) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border: 4px solid var(--neon-green);
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 20px var(--neon-green);
+            position: relative;
+        }
+
+        .loader {
+            border: 4px solid #333;
+            border-top: 4px solid var(--neon-blue);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        .wallet-status {
+            font-size: 0.6rem;
+            color: #ccc;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .close-modal {
+            background: var(--neon-pink);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-family: inherit;
+            font-size: 0.7rem;
+            margin-top: 20px;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* --- Animations --- */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* The new shake for the real images */
+        @keyframes shakeGlitch {
+            0% { transform: translate(0); box-shadow: 5px 5px 0px var(--neon-pink), -5px -5px 0px var(--neon-blue); }
+            25% { transform: translate(-2px, 1px); box-shadow: -5px -5px 0px var(--neon-pink), 5px 5px 0px var(--neon-blue); }
+            50% { transform: translate(2px, -1px); }
+            75% { transform: translate(-1px, 2px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Mobile tweaks */
+        @media (max-width: 768px) {
+            .product-name { font-size: 1.2rem; }
+            .logo { font-size: 1.5rem; }
+            nav a { display: block; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">META MART 🛒</div>
+        <nav>
+            <a href="#">HOME</a>
+            <a href="#">TOKENS</a>
+            <a href="#">ROADMAP</a>
+            <a href="#">TOKENOMICS</a>
+            <a id="connect-wallet" href="#">CONNECT WALLET</a>
+        </nav>
+    </header>
+
+    <div class="marquee">
+        <div class="marquee-content">
+            ⚠️ WARNING: SIDE EFFECTS MAY INCLUDE EXTREME WEALTH & PERMANENT DIAMOND HANDS ⚠️ NEW SHIPMENT ARRIVED: $GSDP IS IN STOCK ⚠️ DO NOT CONSUME IF ALLERGIC TO GAINS ⚠️
+        </div>
+    </div>
+
+    <section class="hero">
+        <h1>Your #1 Stop for<br><span>Degenerate Meme Coins</span><br>in the Metaverse</h1>
+        <p style="font-size: 0.7rem; color: #ccc; margin-top: 20px;">Open 24/7. No refunds. Bull markets only.</p>
+    </section>
+
+    <!-- FEATURED PRODUCT: GSDP -->
+    <section class="featured-section">
+        <h2 class="section-title">🌟 FEATURED ITEM 🌟</h2>
+        
+        <div class="product-card">
+            <div class="product-image">
+                <!-- REAL GSDP IMAGE -->
+                <img src="https://i.imgur.com/Se54NAF.png" alt="GSDP" class="product-img">
+            </div>
+            
+            <div class="product-details">
+                <div class="badge">⚡ BEST SELLER ⚡</div>
+                <h2 class="product-name">GAS STATION D!CK PILL ($GSDP)</h2>
+                <div class="product-desc">
+                    <p>Forget those weak "sugar pill" tokens. $GSDP is powered by the <strong>Blue Rhino</strong> technology—a mysterious compound found only at the farthest reaches of the pixel universe.</p>
+                    <br>
+                    <p>One look at those four lightning buttons, and you’ll know: this isn’t a correction, it’s a fully charged <strong>SUPER PUMP</strong>.</p>
+                </div>
+                <span class="price-tag">MCAP: STIFF AS DIAMOND HANDS 💎</span>
+                <br>
+                <button class="buy-btn">INHALE THE RHINO 🦏</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- OTHER PRODUCTS -->
+    <section class="aisles">
+        <div class="mini-card">
+            <!-- REAL META MART IMAGE -->
+            <img src="https://i.imgur.com/MooRpzn.png" alt="Meta Mart" class="product-img">
+            <h3>META MART ($MART)</h3>
+            <p style="font-size: 0.6rem; margin: 10px 0;">The Wal-Mart of the Wallet. Own the whole building.</p>
+            <button class="cta-btn">BUY LAND</button>
+        </div>
+        
+        <div class="mini-card">
+            <!-- REAL SLUSHIE IMAGE -->
+            <img src="https://i.imgur.com/ZNZDbwY.png" alt="Slushie" class="product-img">
+            <h3>RADIOACTIVE SLUSHIE ($SLUSH)</h3>
+            <p style="font-size: 0.6rem; margin: 10px 0;">Tastes like Chernobyl. May contain Amphetamemes.</p>
+            <button class="cta-btn">DRINK ME</button>
+        </div>
+
+        <div class="mini-card">
+            <!-- REAL DOG IMAGE -->
+            <img src="https://i.imgur.com/EA0EvZ6.png" alt="Meta Dog" class="product-img">
+            <h3>META DOG ($DOG)</h3>
+            <p style="font-size: 0.6rem; margin: 10px 0;">It's just a hot dog. But on the blockchain. 1000x potential.</p>
+            <button class="cta-btn">EAT</button>
+        </div>
+    </section>
+
+    <!-- WALLET MODAL -->
+    <div id="walletModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle" style="color: var(--neon-green); font-size: 1.2rem;">SCANNING...</h2>
+            <div id="loader" class="loader"></div>
+            <div id="modalText" class="wallet-status">
+                Initiating Wallet Scan...
+            </div>
+            <button id="closeModal" class="close-modal">GO ROGUE</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 META MART INTERGALACTIC INC.</p>
+        <p>NOT FINANCIAL ADVICE. WE ARE NOT RESPONSIBLE IF YOU LOSE YOUR HOUSE.</p>
+        <div class="socials">
+            <a href="#">🐦</a>
+            <a href="#">💬</a>
+            <a href="#">📈</a>
+        </div>
+    </footer>
+
+    <script>
+        // --- WALLET MODAL GAG ONLY ---
+        document.getElementById('connect-wallet').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const modal = document.getElementById('walletModal');
+            const title = document.getElementById('modalTitle');
+            const text = document.getElementById('modalText');
+            const loader = document.getElementById('loader');
+            const closeBtn = document.getElementById('closeModal');
+            
+            // Reset State
+            modal.style.display = 'flex';
+            title.innerText = "CONNECTING...";
+            text.innerHTML = "Searching browser for injected Web3 objects...";
+            loader.style.display = 'block';
+            closeBtn.style.display = 'none';
+            title.style.color = 'var(--neon-green)';
+
+            // Sequence 1: Found Wallet
+            setTimeout(() => {
+                text.innerHTML = "Wallet Detected!<br>Address: <span style='color:var(--neon-pink)'>0xDEGEN...69B</span>";
+            }, 1500);
+
+            // Sequence 2: Checking Balance
+            setTimeout(() => {
+                text.innerHTML += "<br><br>Checking Solana balance...";
+            }, 3000);
+
+            // Sequence 3: The Punchline
+            setTimeout(() => {
+                title.innerText = "CONNECTED";
+                title.style.color = 'var(--neon-pink)';
+                loader.style.display = 'none';
+                text.innerHTML = `
+                    <span style="color: white">USER:</span> TOTAL DEGEN<br>
+                    <span style="color: red">FUNDS:</span> $0.04<br>
+                    <span style="color: var(--neon-blue)">BUYING POWER:</span> INFINITE<br><br>
+                    SYSTEM MESSAGE: "WE LIKE YOUR ODDS"
+                `;
+                closeBtn.style.display = 'inline-block';
+            }, 4500);
+        });
+
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('walletModal').style.display = 'none';
+        });
+
+        // Close modal if clicking outside content
+        window.onclick = function(event) {
+            const modal = document.getElementById('walletModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
