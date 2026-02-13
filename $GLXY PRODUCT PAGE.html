@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$GLXY | Galaxy Gas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-blue: #00ffff;
+            --neon-green: #00ff00;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --neon-purple: #bf00ff; /* Added a specific purple for this page */
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Nav --- */
+        .top-nav {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .back-link {
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-size: 0.7rem;
+            border: 2px solid var(--neon-blue);
+            padding: 10px;
+            display: inline-block;
+        }
+
+        .back-link:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* --- Hero --- */
+        .hero-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 1.5;
+            text-shadow: 4px 4px 0px var(--neon-purple);
+            margin-top: 20px;
+        }
+
+        .tickers {
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            display: block;
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        /* --- Image --- */
+        .hero-img-container {
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        .product-img {
+            max-width: 300px;
+            height: auto;
+            /* Space/Glitch Effect */
+            box-shadow: 
+                6px 6px 0px var(--neon-blue), 
+                -6px -6px 0px var(--neon-purple);
+            animation: floatShake 4s infinite ease-in-out;
+            image-rendering: pixelated;
+        }
+
+        /* --- Content Box --- */
+        .content-box {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-blue);
+            padding: 40px;
+            margin: 0 auto 40px;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 10px 10px 0px rgba(191, 0, 255, 0.2);
+            position: relative;
+        }
+
+        .content-box::before {
+            content: "INFO";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--neon-blue);
+            color: #000;
+            padding: 5px 10px;
+            font-size: 0.6rem;
+        }
+
+        .story-text {
+            font-size: 0.8rem;
+            line-height: 2;
+            color: #ccc;
+            text-align: justify;
+        }
+
+        .story-text strong {
+            color: var(--neon-purple);
+        }
+
+        /* --- Warning Box --- */
+        .warning-box {
+            border: 2px dashed var(--neon-purple);
+            padding: 20px;
+            margin-top: 30px;
+            background: rgba(191, 0, 255, 0.05);
+        }
+
+        .warning-title {
+            color: var(--neon-purple);
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* --- Big Action Button --- */
+        .launch-container {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+        }
+
+        .launch-btn {
+            background: var(--neon-blue);
+            color: #000;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            padding: 25px 40px;
+            border: none;
+            cursor: not-allowed; /* Not clickable yet */
+            box-shadow: 8px 8px 0px var(--neon-purple);
+            animation: pulseBig 2s infinite ease-in-out;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: auto;
+            background: #000;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.5rem;
+            color: #666;
+            border-top: 2px solid #333;
+        }
+
+        /* --- Animations --- */
+        @keyframes floatShake {
+            0% { transform: translateY(0) rotate(0deg); box-shadow: 6px 6px 0px var(--neon-blue), -6px -6px 0px var(--neon-purple); }
+            25% { transform: translateY(-2px) rotate(1deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(-2px) rotate(-1deg); }
+            100% { transform: translateY(0) rotate(0deg); box-shadow: 6px 6px 0px var(--neon-blue), -6px -6px 0px var(--neon-purple); }
+        }
+
+        @keyframes pulseBig {
+            0% { transform: scale(1); box-shadow: 8px 8px 0px var(--neon-purple); }
+            50% { transform: scale(1.05); box-shadow: 12px 12px 0px var(--neon-purple), 0 0 20px var(--neon-blue); }
+            100% { transform: scale(1); box-shadow: 8px 8px 0px var(--neon-purple); }
+        }
+
+        /* Mobile tweaks */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.2rem; }
+            .product-img { max-width: 200px; }
+            .launch-btn { font-size: 0.8rem; padding: 20px 30px; }
+            .content-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a href="index.html" class="back-link">⬅ BACK TO META MART</a>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-img-container">
+            <!-- UPDATED LINK -->
+            <img src="https://i.imgur.com/cTECWsJ.png" alt="Galaxy Gas" class="product-img">
+        </div>
+        
+        <h1>GALAXY GAS</h1>
+        <span class="tickers">$GLXY</span>
+    </section>
+
+    <div class="content-box">
+        <div class="story-text">
+            <p>Distilled from the exhaust fumes of a crashed UFO and pressed into a sleek, purple canister. <strong>$GLXY</strong> isn't just a recreational substance for the desperate; it’s a one-way ticket to the Andromeda Galaxy.</p>
+            <br>
+            <p>We don’t know what gas is actually in here—scientists say it’s nitrous, but we’re pretty sure it’s just liquid stardust and regret. One balloon sends you floating in zero-G where the red candles don't exist. You won't just watch the charts; you'll become the candlestick pattern. It’s perfect for when the market dumps so hard you need to physically detach your brain from your body to cope.</p>
+            
+            <div class="warning-box">
+                <span class="warning-title">⚠️ WARNING: ZERO G SAFETY</span>
+                <p style="margin:0; font-size: 0.7rem;">Do not inhale near open flames or open short positions. Side effects include temporary enlightenment, uncontrollable giggling at your portfolio, and the overwhelming urge to buy a rocket ship.</p>
+            </div>
+
+            <br>
+            <p>Strap in. The tank is full. Prepare for liftoff.</p>
+        </div>
+    </div>
+
+    <div class="launch-container">
+        <button class="launch-btn">INHALE THE GALAXY 🪐</button>
+        <p style="margin-top: 15px; font-size: 0.6rem; color: var(--neon-blue);">PRESSURIZING TANK...</p>
+    </div>
+
+    <footer>
+        <p>META MART INTERGALACTIC INC.</p>
+        <p>NOT FINANCIAL ADVICE. OXYGEN MASKS WILL NOT DEPLOY.</p>
+    </footer>
+
+</body>
+</html>
