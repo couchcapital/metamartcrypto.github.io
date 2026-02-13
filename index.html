@@ -114,7 +114,7 @@
         .hero {
             position: relative;
             text-align: center;
-            padding: 80px 20px; /* Reduced padding slightly since button is gone */
+            padding: 80px 20px; 
             background: radial-gradient(circle at center, #2a002a 0%, #000 90%);
             overflow: hidden;
             display: flex;
@@ -180,7 +180,6 @@
             display: block;
             max-width: 100%;
             height: auto;
-            /* Enhanced Glitch Shadow */
             filter: drop-shadow(5px 5px 0px var(--neon-pink)) drop-shadow(-5px -5px 0px var(--neon-blue));
             animation: floatShake 4s infinite ease-in-out;
             image-rendering: pixelated;
@@ -234,7 +233,7 @@
             padding-bottom: 10px;
         }
 
-        /* Buttons (Converted to links styling) */
+        /* Buttons */
         .btn {
             display: inline-block;
             padding: 15px 30px;
@@ -289,7 +288,7 @@
         /* --- Grid Aisles --- */
         .aisles {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             padding: 20px;
             max-width: 1200px;
@@ -476,7 +475,7 @@
             100% { transform: translateY(0) rotate(0deg); }
         }
 
-        /* Mobile Tweaks */
+        /* Mobile tweaks */
         @media (max-width: 768px) {
             .logo { font-size: 1.2rem; }
             .hero h1 { font-size: 1.1rem; }
@@ -506,7 +505,7 @@
         </div>
     </div>
 
-    <!-- HERO SECTION WITH SLOWED CANVAS ANIMATION -->
+    <!-- HERO SECTION WITH CANVAS ANIMATION -->
     <section class="hero">
         <canvas id="hero-canvas"></canvas>
         <div class="hero-content">
@@ -535,19 +534,17 @@
                 </div>
                 <span class="price-tag">MCAP: STIFF AS DIAMOND HANDS 💎</span>
                 <br>
-                <!-- Updated Link -->
                 <a href="$GSDP PRODUCT PAGE.html" class="btn buy-btn">INHALE THE RHINO 🦏</a>
             </div>
         </div>
     </section>
 
-    <!-- OTHER PRODUCTS -->
+    <!-- OTHER PRODUCTS (UPDATED BUTTZ IMAGE) -->
     <section class="aisles">
         <div class="mini-card">
             <img src="https://i.imgur.com/MooRpzn.png" alt="Meta Mart" class="product-img">
             <h3>META MART ($MART)</h3>
             <p style="font-size: 0.6rem; margin: 10px 0;">The Wal-Mart of the Wallet. Own the whole building.</p>
-            <!-- Updated Link -->
             <a href="META MART PRODUCT PAGE.html" class="btn cta-btn">BUY LAND</a>
         </div>
         
@@ -555,16 +552,23 @@
             <img src="https://i.imgur.com/ZNZDbwY.png" alt="Slushie" class="product-img">
             <h3>RADIOACTIVE SLUSHIE ($SLUSH)</h3>
             <p style="font-size: 0.6rem; margin: 10px 0;">Tastes like Chernobyl. May contain Amphetamemes.</p>
-            <!-- Updated Link -->
             <a href="$SLUSHI PRODUCT PAGE.html" class="btn cta-btn">DRINK ME</a>
         </div>
 
         <div class="mini-card">
-            <img src="https://i.imgur.com/EA0EvZ6.png" alt="Meta Dog" class="product-img">
-            <h3>META DOG ($DOG)</h3>
-            <p style="font-size: 0.6rem; margin: 10px 0;">It's just a hot dog. But on the blockchain. 1000x potential.</p>
-            <!-- Updated Link -->
-            <a href="$DOG PRODUCT PAGE.html" class="btn cta-btn">EAT</a>
+            <!-- UPDATED LINK: Real Image for Packa Buttz -->
+            <img src="https://i.imgur.com/UEm3YiS.png" alt="Packa Buttz" class="product-img">
+            <h3>PACKA BUTTZ ($BUTTZ)</h3>
+            <p style="font-size: 0.6rem; margin: 10px 0;">Premium leaf. Mystery additive. Glowing eyes.</p>
+            <a href="$BUTTZ PRODUCT PAGE.html" class="btn cta-btn">LIGHT UP</a>
+        </div>
+
+        <!-- GALAXY GAS CARD -->
+        <div class="mini-card">
+            <img src="https://i.imgur.com/cTECWsJ.png" alt="Galaxy Gas" class="product-img">
+            <h3>GALAXY GAS ($GLXY)</h3>
+            <p style="font-size: 0.6rem; margin: 10px 0;">Distilled from UFO exhaust. A one-way ticket to Andromeda.</p>
+            <a href="$GLXY PRODUCT PAGE.html" class="btn cta-btn">INHALE</a>
         </div>
     </section>
 
