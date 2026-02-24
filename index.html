@@ -87,11 +87,6 @@
             transform: translateY(-2px);
         }
 
-        #connect-wallet {
-            border-color: var(--neon-green);
-            color: var(--neon-green);
-        }
-
         /* --- Marquee --- */
         .marquee {
             background: var(--neon-green);
@@ -424,7 +419,7 @@
             transform: translateY(0);
         }
 
-        /* --- Modal (Wallet Gag) --- */
+        /* --- Modal (General Purpose) --- */
         .modal {
             display: none;
             position: fixed;
@@ -468,7 +463,7 @@
             margin: 20px auto;
         }
 
-        .wallet-status {
+        .modal-status {
             font-size: 0.65rem;
             color: #ccc;
             margin-top: 15px;
@@ -551,11 +546,11 @@
         <div class="logo">META MART 🛒</div>
         <nav>
             <a href="#" class="active">HOME</a>
-            <a href="#">TOKENS</a>
-            <a href="#">ROADMAP</a>
+            <!-- TOKENS BUTTON REMOVED -->
+            <!-- ID Added for Roadmap Popup -->
+            <a href="#" id="roadmap-btn">ROADMAP</a>
             <!-- UPDATED LINK -->
             <a href="tokenomics.html">TOKENOMICS</a>
-            <a id="connect-wallet" href="#">CONNECT WALLET</a>
         </nav>
     </header>
 
@@ -631,15 +626,15 @@
         </div>
     </section>
 
-    <!-- WALLET MODAL -->
-    <div id="walletModal" class="modal">
+    <!-- MODAL -->
+    <div id="infoModal" class="modal">
         <div class="modal-content">
             <h2 id="modalTitle" style="color: var(--neon-green); font-size: 1rem;">SCANNING...</h2>
             <div id="loader" class="loader"></div>
-            <div id="modalText" class="wallet-status">
-                Initiating Wallet Scan...
+            <div id="modalText" class="modal-status">
+                Initiating System...
             </div>
-            <button id="closeModal" class="close-modal">GO ROGUE</button>
+            <button id="closeModal" class="close-modal">CLOSE</button>
         </div>
     </div>
 
@@ -657,7 +652,7 @@
             </a>
             
             <!-- Discord Link -->
-            <a href="https://discord.gg/RpKVEKzUV" target="_blank" class="social-btn discord" aria-label="Discord">
+            <a href="https://discord.gg/h4hWXQGY" target="_blank" class="social-btn discord" aria-label="Discord">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
             </a>
             
@@ -671,7 +666,6 @@
     <script>
         /**
          * ANIMATION SHOWCASE ENGINE
-         * Slowed down to 50% speed
          */
         const canvas = document.getElementById('hero-canvas');
         const ctx = canvas.getContext('2d');
@@ -680,7 +674,7 @@
         let width, height;
         const fov = 300;
         const viewDist = 3;
-        let speed = 1; // Reduced from 2 to 1 (50% slower)
+        let speed = 1; 
         let offset = 0;
         
         function resize() {
@@ -692,20 +686,15 @@
         resize();
 
         function drawGrid() {
-            // Fade effect instead of clearRect for trails? No, clean redraw for crisp grid.
             ctx.clearRect(0, 0, width, height);
             
-            // Horizon line
             const horizon = height / 2;
-            
             ctx.lineWidth = 1;
             ctx.strokeStyle = 'rgba(255, 0, 255, 0.3)'; // Neon Pink Grid
             
-            // Vertical lines (Perspective)
+            // Vertical lines
             const centerX = width / 2;
             for (let x = -width; x < width * 2; x += 40) {
-                // Simple perspective projection math
-                // Just drawing lines fanning out from center
                 ctx.beginPath();
                 ctx.moveTo(centerX + (x - centerX) * 0.1, horizon);
                 ctx.lineTo(x, height);
@@ -713,28 +702,21 @@
             }
             
             // Horizontal lines (Moving)
-            // We move the offset downwards to simulate moving forward
             offset = (offset + speed) % 40;
             
             for (let y = horizon; y < height; y += 10 + (y-horizon)*0.05) {
-                // Make lines get closer together as they get further away (visually up the screen)
-                // This is a pseudo-3D effect for simplicity and performance
                 let drawY = y + offset * ((y - horizon) / height * 2);
-                
-                // Wrap around logic isn't perfect in pseudo-3D without complex Z-buffering, 
-                // so we'll just loop drawing lines based on a mod relative to distance.
                 
                 ctx.beginPath();
                 ctx.moveTo(0, drawY);
                 ctx.lineTo(width, drawY);
                 
-                // Color gradient based on distance
                 const alpha = (drawY - horizon) / (height - horizon);
-                ctx.strokeStyle = `rgba(0, 255, 255, ${alpha * 0.5})`; // Neon Blue fade
+                ctx.strokeStyle = `rgba(0, 255, 255, ${alpha * 0.5})`; 
                 ctx.stroke();
             }
             
-            // Add a retro "sun" in the background
+            // Retro Sun
             const gradient = ctx.createLinearGradient(centerX, horizon - 100, centerX, horizon + 50);
             gradient.addColorStop(0, '#ffff00');
             gradient.addColorStop(1, '#ff00ff');
@@ -756,72 +738,50 @@
             requestAnimationFrame(animate);
         }
 
-        // Start Animation
         animate();
 
 
         /**
-         * WALLET GAG LOGIC
+         * MODAL LOGIC
          */
-        document.getElementById('connect-wallet').addEventListener('click', function(e) {
+        const roadmapBtn = document.getElementById('roadmap-btn');
+        const modal = document.getElementById('infoModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalText = document.getElementById('modalText');
+        const loader = document.getElementById('loader');
+        const closeBtn = document.getElementById('closeModal');
+
+        // Roadmap Button Click
+        roadmapBtn.addEventListener('click', function(e) {
             e.preventDefault();
             
-            const modal = document.getElementById('walletModal');
-            const content = modal.querySelector('.modal-content');
-            const title = document.getElementById('modalTitle');
-            const text = document.getElementById('modalText');
-            const loader = document.getElementById('loader');
-            const closeBtn = document.getElementById('closeModal');
-            
-            // Reset State
+            // Show Modal
             modal.style.display = 'flex';
-            // Small delay to allow display:flex to apply before adding opacity class
             setTimeout(() => modal.classList.add('active'), 10);
             
-            title.innerText = "CONNECTING...";
-            text.innerHTML = "Searching browser for injected Web3 objects...";
-            loader.style.display = 'block';
-            closeBtn.style.display = 'none';
-            title.style.color = 'var(--neon-green)';
-
-            // Sequence 1: Found Wallet
-            setTimeout(() => {
-                text.innerHTML = "Wallet Detected!<br>Address: <span style='color:var(--neon-pink)'>0xDEGEN...69B</span>";
-            }, 1500);
-
-            // Sequence 2: Checking Balance
-            setTimeout(() => {
-                text.innerHTML += "<br><br>Checking Solana balance...";
-            }, 3000);
-
-            // Sequence 3: The Punchline
-            setTimeout(() => {
-                title.innerText = "CONNECTED";
-                title.style.color = 'var(--neon-pink)';
-                loader.style.display = 'none';
-                text.innerHTML = `
-                    <span style="color: white">USER:</span> TOTAL DEGEN<br>
-                    <span style="color: red">FUNDS:</span> $0.04<br>
-                    <span style="color: var(--neon-blue)">BUYING POWER:</span> INFINITE<br><br>
-                    SYSTEM MESSAGE: "WE LIKE YOUR ODDS"
-                `;
-                closeBtn.style.display = 'inline-block';
-            }, 4500);
+            // Set "Coming Soon" Content
+            modalTitle.innerText = "COMING SOON";
+            modalTitle.style.color = "var(--neon-pink)"; // Pink title
+            modalText.innerHTML = "Our flight path is still being calculated.<br>Check back later for the coordinates to the moon.";
+            
+            // UI Adjustments
+            loader.style.display = 'none'; // Hide spinner
+            closeBtn.style.display = 'inline-block'; // Show close button immediately
+            closeBtn.innerText = "ACKNOWLEDGE";
         });
 
-        document.getElementById('closeModal').addEventListener('click', function() {
-            const modal = document.getElementById('walletModal');
+        // Close Button Logic
+        closeBtn.addEventListener('click', function() {
             modal.classList.remove('active');
             setTimeout(() => {
                 modal.style.display = 'none';
-            }, 300); // Wait for transition
+            }, 300);
         });
 
-        // Close modal if clicking outside content
+        // Close if clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('walletModal');
             if (event.target == modal) {
-                document.getElementById('closeModal').click();
+                closeBtn.click();
             }
         }
     </script>
