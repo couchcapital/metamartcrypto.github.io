@@ -547,8 +547,8 @@
         <nav>
             <a href="#" class="active">HOME</a>
             <!-- TOKENS BUTTON REMOVED -->
-            <!-- ID Added for Roadmap Popup -->
-            <a href="#" id="roadmap-btn">ROADMAP</a>
+            <!-- UPDATED ROADMAP LINK (No ID, Direct Link) -->
+            <a href="roadmap.html">ROADMAP</a>
             <!-- UPDATED LINK -->
             <a href="tokenomics.html">TOKENOMICS</a>
         </nav>
@@ -626,7 +626,7 @@
         </div>
     </section>
 
-    <!-- MODAL -->
+    <!-- MODAL (Kept in HTML but JS removed) -->
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <h2 id="modalTitle" style="color: var(--neon-green); font-size: 1rem;">SCANNING...</h2>
@@ -740,50 +740,7 @@
 
         animate();
 
-
-        /**
-         * MODAL LOGIC
-         */
-        const roadmapBtn = document.getElementById('roadmap-btn');
-        const modal = document.getElementById('infoModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalText = document.getElementById('modalText');
-        const loader = document.getElementById('loader');
-        const closeBtn = document.getElementById('closeModal');
-
-        // Roadmap Button Click
-        roadmapBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Show Modal
-            modal.style.display = 'flex';
-            setTimeout(() => modal.classList.add('active'), 10);
-            
-            // Set "Coming Soon" Content
-            modalTitle.innerText = "COMING SOON";
-            modalTitle.style.color = "var(--neon-pink)"; // Pink title
-            modalText.innerHTML = "Our flight path is still being calculated.<br>Check back later for the coordinates to the moon.";
-            
-            // UI Adjustments
-            loader.style.display = 'none'; // Hide spinner
-            closeBtn.style.display = 'inline-block'; // Show close button immediately
-            closeBtn.innerText = "ACKNOWLEDGE";
-        });
-
-        // Close Button Logic
-        closeBtn.addEventListener('click', function() {
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        });
-
-        // Close if clicking outside
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeBtn.click();
-            }
-        }
+        // Modal Logic Removed as requested
     </script>
 </body>
 </html>
