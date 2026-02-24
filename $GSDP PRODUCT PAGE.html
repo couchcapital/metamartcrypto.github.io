@@ -58,7 +58,7 @@
         /* --- Hero --- */
         .hero-section {
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px 20px 40px;
         }
 
         h1 {
@@ -73,13 +73,75 @@
         .tickers {
             color: var(--neon-blue);
             font-size: 1.5rem;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             display: block;
+        }
+
+        /* --- New Token Info Section --- */
+        .token-info-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .ca-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--neon-green);
+            padding: 12px;
+            max-width: 90%;
+            width: 500px;
+            color: var(--neon-green);
+            font-size: 0.5rem;
+            word-break: break-all;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .ca-box:hover {
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        .ca-box::after {
+            content: "[COPY]";
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.4rem;
+            color: #fff;
+            opacity: 0.7;
+        }
+
+        .lp-btn {
+            background: var(--neon-pink);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.7rem;
+            padding: 10px 20px;
+            border: 2px solid #fff;
+            box-shadow: 4px 4px 0px #000;
+            text-transform: uppercase;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .lp-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #000;
+            background: #ff66ff;
+        }
+
+        .lp-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px #000;
         }
 
         /* --- Image --- */
         .hero-img-container {
-            margin: 40px auto;
+            margin: 20px auto;
             text-align: center;
         }
 
@@ -143,7 +205,7 @@
             display: block;
         }
 
-        /* --- Big Launch Button --- */
+        /* --- Big Launch/Buy Button --- */
         .launch-container {
             text-align: center;
             padding: 40px 20px;
@@ -157,12 +219,18 @@
             font-size: 1.5rem;
             padding: 30px 50px;
             border: none;
-            cursor: not-allowed; /* Not clickable yet */
+            cursor: pointer; 
             box-shadow: 8px 8px 0px var(--neon-pink);
             animation: pulseBig 2s infinite ease-in-out;
             text-transform: uppercase;
             position: relative;
             z-index: 10;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .launch-btn:hover {
+            background: #66ffff;
         }
 
         /* --- Footer --- */
@@ -197,6 +265,7 @@
             .product-img { max-width: 200px; }
             .launch-btn { font-size: 1rem; padding: 20px 30px; }
             .content-box { padding: 20px; }
+            .ca-box { font-size: 0.45rem; padding: 10px; }
         }
     </style>
 </head>
@@ -208,12 +277,21 @@
 
     <section class="hero-section">
         <div class="hero-img-container">
-            <!-- FIXED LINK: Changed to direct imgur source for reliability -->
             <img src="https://i.imgur.com/L68RvWx.png" alt="GSDP Logo" class="product-img">
         </div>
         
         <h1>GAS STATION D!CK PILL</h1>
         <span class="tickers">$GSDP</span>
+
+        <!-- NEW SECTION: Token Address & Locked LP -->
+        <div class="token-info-area">
+            <div class="ca-box" onclick="copyToClipboard('8yxWA7KBZ46tsEchJ69beh2DrbkJpEZVgA8XPBr2ZxXh', this)" title="Click to Copy Address">
+                TOKEN ADDRESS: 8yxWA7KBZ46tsEchJ69beh2DrbkJpEZVgA8XPBr2ZxXh
+            </div>
+            <a href="http://tiny.cc/GSDPLP" target="_blank" class="lp-btn">🔒 LOCKED LP</a>
+        </div>
+        <!-- END NEW SECTION -->
+
     </section>
 
     <div class="content-box">
@@ -233,8 +311,9 @@
     </div>
 
     <div class="launch-container">
-        <button class="launch-btn">LAUNCHING SOON!</button>
-        <p style="margin-top: 15px; font-size: 0.6rem; color: var(--neon-green);">DEPLOYING TO THE BLOCKCHAIN...</p>
+        <!-- CHANGED: Button is now a link to DexTools with text "BUY NOW" -->
+        <a href="https://www.dextools.io/app/solana/pair-explorer/8QieqJKJd7AmpUxVMPg4xV9i8daNz68ZjuissW9oVkzt" target="_blank" class="launch-btn">BUY NOW</a>
+        <p style="margin-top: 15px; font-size: 0.6rem; color: var(--neon-green);">AVAILABLE ON DEXTOOLS</p>
     </div>
 
     <footer>
@@ -242,6 +321,29 @@
         <p>NOT FINANCIAL ADVICE. SIDE EFFECTS INCLUDE DIAMOND HANDS.</p>
     </footer>
 
+    <script>
+        // Simple script to copy address to clipboard without native alerts
+        function copyToClipboard(text, element) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = element.innerText;
+                
+                // Visual feedback
+                element.style.background = "var(--neon-green)";
+                element.style.color = "#000";
+                element.innerText = "COPIED TO CLIPBOARD!";
+                element.style.fontWeight = "bold";
+
+                // Revert after 2 seconds
+                setTimeout(() => {
+                    element.innerText = originalText;
+                    element.style.background = "rgba(0, 0, 0, 0.6)";
+                    element.style.color = "var(--neon-green)";
+                    element.style.fontWeight = "normal";
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
 </body>
 </html>
-
