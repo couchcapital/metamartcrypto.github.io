@@ -110,7 +110,7 @@
             cursor: pointer;
             transition: all 0.2s;
             position: relative;
-            user-select: text; /* Allow text selection here */
+            user-select: text;
         }
 
         .ca-box:hover {
@@ -293,10 +293,8 @@
             padding-bottom: 60px;
             display: flex;
             justify-content: center;
-            /* Ensure game doesn't stick to the footer immediately */
         }
 
-        /* Apply user-select none only to the game container */
         .arcade-cabinet * {
             user-select: none;
             -webkit-user-select: none;
@@ -338,7 +336,6 @@
             position: relative;
         }
 
-        /* --- THE GAME SCREEN (CRT EFFECT) --- */
         .game-container {
             position: relative;
             width: 100%;
@@ -356,7 +353,6 @@
             height: 100%;
         }
 
-        /* CRT Scanlines Overlay */
         .scanlines {
             position: absolute;
             top: 0;
@@ -375,7 +371,6 @@
             z-index: 10;
         }
         
-        /* CRT Flicker Animation */
         .game-container::after {
             content: " ";
             display: block;
@@ -397,7 +392,6 @@
             100% { opacity: 0.027; }
         }
 
-        /* --- UI OVERLAYS --- */
         .ui-layer {
             position: absolute;
             top: 0;
@@ -414,9 +408,7 @@
             text-shadow: 2px 2px 0 #000;
         }
 
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
 
         .arcade-cabinet h1 {
             font-size: 32px;
@@ -451,9 +443,7 @@
             box-shadow: 0 2px 0 #990099;
         }
 
-        .btn:hover {
-            background: #ff33ff;
-        }
+        .btn:hover { background: #ff33ff; }
 
         .score-board {
             position: absolute;
@@ -465,7 +455,6 @@
             text-shadow: 2px 2px 0 #000;
         }
 
-        /* --- CONTROL PANEL DECORATION --- */
         .control-panel {
             margin-top: 20px;
             height: 60px;
@@ -487,10 +476,7 @@
             box-shadow: 0 4px 0 #000;
         }
 
-        .buttons-deco {
-            display: flex;
-            gap: 15px;
-        }
+        .buttons-deco { display: flex; gap: 15px; }
 
         .arcade-btn {
             width: 40px;
@@ -501,6 +487,54 @@
         }
         .red-btn { background: #ff3333; }
         .blue-btn { background: #3333ff; }
+
+        /* =========================================
+           CHART STYLES (NEW)
+           ========================================= */
+        .chart-wrapper {
+            max-width: 1200px;
+            margin: 0 auto 60px auto; /* Centered with space at bottom */
+            width: 90%;
+            border: 2px solid var(--neon-blue);
+            background: #000;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .chart-wrapper h3 {
+            text-align: center;
+            color: var(--neon-blue);
+            font-size: 1rem;
+            margin: 15px 0;
+            text-shadow: 0 0 5px var(--neon-blue);
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #000;
+            padding: 0 10px;
+            z-index: 5;
+        }
+
+        #dexscreener-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 125%;
+        }
+
+        @media (min-width: 1400px) {
+            #dexscreener-embed {
+                padding-bottom: 65%;
+            }
+        }
+
+        #dexscreener-embed iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border: 0;
+        }
 
     </style>
 </head>
@@ -591,7 +625,14 @@
             </div>
         </div>
     </div>
-    <!-- END GAME SECTION -->
+
+    <!-- CHART SECTION (NEW) -->
+    <div class="chart-wrapper">
+        <h3>📈 LIVE CHART</h3>
+        <div id="dexscreener-embed">
+            <iframe src="https://dexscreener.com/solana/8QieqJKJd7AmpUxVMPg4xV9i8daNz68ZjuissW9oVkzt?embed=1&loadChartSettings=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
+        </div>
+    </div>
 
     <footer>
         <p>META MART INTERGALACTIC INC.</p>
@@ -620,7 +661,7 @@
         }
     </script>
 
-    <!-- GAME SCRIPT (Wrapped to prevent scope pollution) -->
+    <!-- GAME SCRIPT (Wrapped) -->
     <script>
     (function() {
         const AudioSys = {
