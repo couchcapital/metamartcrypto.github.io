@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>$GSDP | Blue Rhino Rocket Fuel</title>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
     <style>
+        /* =========================================
+           PRODUCT PAGE STYLES
+           ========================================= */
         :root {
             --neon-pink: #ff00ff;
             --neon-blue: #00ffff;
@@ -86,7 +91,6 @@
             margin-top: 10px;
         }
 
-        /* Container to hold buttons side-by-side */
         .button-row {
             display: flex;
             gap: 15px;
@@ -106,6 +110,7 @@
             cursor: pointer;
             transition: all 0.2s;
             position: relative;
+            user-select: text; /* Allow text selection here */
         }
 
         .ca-box:hover {
@@ -134,7 +139,6 @@
             box-shadow: 4px 4px 0px #000;
             text-transform: uppercase;
             transition: transform 0.1s, box-shadow 0.1s;
-            /* Flex properties to ensure buttons align evenly if heights differ */
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -160,7 +164,6 @@
         .product-img {
             max-width: 300px;
             height: auto;
-            /* Consistent Double Image Effect */
             box-shadow: 
                 6px 6px 0px var(--neon-pink), 
                 -6px -6px 0px var(--neon-blue);
@@ -271,21 +274,239 @@
             100% { transform: scale(1); box-shadow: 8px 8px 0px var(--neon-pink); }
         }
 
-        /* Mobile tweaks */
+        /* Mobile tweaks for Product Page */
         @media (max-width: 768px) {
             h1 { font-size: 1.2rem; }
             .product-img { max-width: 200px; }
             .launch-btn { font-size: 1rem; padding: 20px 30px; }
             .content-box { padding: 20px; }
             .ca-box { font-size: 0.45rem; padding: 10px; }
-            /* On mobile, buttons stack neatly if screen is very narrow */
             .button-row { flex-direction: column; width: 100%; }
             .lp-btn { width: 100%; box-sizing: border-box; }
         }
+
+        /* =========================================
+           GAME STYLES (SCOPED)
+           ========================================= */
+        .game-section {
+            width: 100%;
+            padding-bottom: 60px;
+            display: flex;
+            justify-content: center;
+            /* Ensure game doesn't stick to the footer immediately */
+        }
+
+        /* Apply user-select none only to the game container */
+        .arcade-cabinet * {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .arcade-cabinet {
+            position: relative;
+            width: 800px;
+            max-width: 95vw;
+            background: #2c2c2c;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 
+                0 0 0 10px #000,
+                0 20px 50px rgba(0,0,0,0.8),
+                inset 0 0 60px rgba(0,0,0,0.5);
+            border-bottom: 15px solid #111;
+            transform: perspective(1000px) rotateX(2deg);
+        }
+
+        .marquee {
+            background: #000;
+            color: var(--neon-pink);
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px var(--neon-pink);
+            letter-spacing: 2px;
+            border: 2px solid #444;
+            font-size: 14px;
+        }
+
+        .screen-bezel {
+            background: #000;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: inset 0 0 20px #000;
+            position: relative;
+        }
+
+        /* --- THE GAME SCREEN (CRT EFFECT) --- */
+        .game-container {
+            position: relative;
+            width: 100%;
+            height: 400px; 
+            background-color: #050510;
+            border: 4px solid #222;
+            overflow: hidden;
+            border-radius: 60px / 20px; 
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+        }
+
+        .game-container canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* CRT Scanlines Overlay */
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        /* CRT Flicker Animation */
+        .game-container::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: rgba(18, 16, 16, 0.1);
+            opacity: 0;
+            z-index: 10;
+            pointer-events: none;
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.027; }
+            50% { opacity: 0.04; }
+            100% { opacity: 0.027; }
+        }
+
+        /* --- UI OVERLAYS --- */
+        .ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .arcade-cabinet h1 {
+            font-size: 32px;
+            color: #3b82f6;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0px var(--neon-pink);
+            line-height: 1.5;
+        }
+
+        .arcade-cabinet p {
+            font-size: 12px;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 30px;
+            max-width: 80%;
+        }
+
+        .btn {
+            background: var(--neon-pink);
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #990099;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #990099;
+        }
+
+        .btn:hover {
+            background: #ff33ff;
+        }
+
+        .score-board {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 16px;
+            color: var(--neon-blue);
+            z-index: 15;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        /* --- CONTROL PANEL DECORATION --- */
+        .control-panel {
+            margin-top: 20px;
+            height: 60px;
+            background: #222;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            border: 2px solid #444;
+        }
+
+        .joystick-deco {
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(#555, #222);
+            border-radius: 50%;
+            border: 2px solid #111;
+            box-shadow: 0 4px 0 #000;
+        }
+
+        .buttons-deco {
+            display: flex;
+            gap: 15px;
+        }
+
+        .arcade-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #111;
+            box-shadow: 0 4px 0 #000;
+        }
+        .red-btn { background: #ff3333; }
+        .blue-btn { background: #3333ff; }
+
     </style>
 </head>
 <body>
 
+    <!-- PRODUCT PAGE CONTENT -->
     <nav class="top-nav">
         <a href="index.html" class="back-link">⬅ BACK TO META MART</a>
     </nav>
@@ -298,23 +519,16 @@
         <h1>GAS STATION D!CK PILL</h1>
         <span class="tickers">$GSDP</span>
 
-        <!-- Token Info Section -->
         <div class="token-info-area">
-            <!-- Address Box (Full Width) -->
             <div class="ca-box" onclick="copyToClipboard('8yxWA7KBZ46tsEchJ69beh2DrbkJpEZVgA8XPBr2ZxXh', this)" title="Click to Copy Address">
                 TOKEN ADDRESS: 8yxWA7KBZ46tsEchJ69beh2DrbkJpEZVgA8XPBr2ZxXh
             </div>
             
-            <!-- Buttons Row (Side by Side) -->
             <div class="button-row">
-                <!-- Link: Raydium Liquidity Pool -->
                 <a href="https://raydium.io/liquidity-pools/?token=8yxWA7KBZ46tsEchJ69beh2DrbkJpEZVgA8XPBr2ZxXh" target="_blank" class="lp-btn">🔒 LOCKED LP</a>
-                
                 <a href="tokenomics.html" class="lp-btn">📊 TOKENOMICS</a>
             </div>
         </div>
-        <!-- End Token Info Section -->
-
     </section>
 
     <div class="content-box">
@@ -334,29 +548,66 @@
     </div>
 
     <div class="launch-container">
-        <!-- UPDATED LINK: DexScreener -->
         <a href="https://dexscreener.com/solana/8yxWA7KBZ46tsEchJ69beh2DrbkJpEZVgA8XPBr2ZxXh" target="_blank" class="launch-btn">BUY NOW</a>
         <p style="margin-top: 15px; font-size: 0.6rem; color: var(--neon-green);">AVAILABLE ON DEXSCREENER</p>
     </div>
+
+    <!-- GAME SECTION -->
+    <div class="game-section">
+        <div class="arcade-cabinet">
+            <div class="marquee">RHINO RUSH - NEON CITY</div>
+            
+            <div class="screen-bezel">
+                <div class="game-container">
+                    <canvas id="gameCanvas" width="700" height="350"></canvas>
+                    <div class="scanlines"></div>
+                    <div class="score-board">SCORE: <span id="scoreVal">0</span></div>
+
+                    <!-- Start Screen -->
+                    <div id="startScreen" class="ui-layer">
+                        <h1>BLUE RHINO<br>CITY RUN</h1>
+                        <p>Jump over Crates 📦<br>Catch Square Diamonds 🔷</p>
+                        <p style="color: var(--neon-blue)">[SPACE] or [TAP] to Jump</p>
+                        <button class="btn" id="startBtn">INSERT COIN</button>
+                    </div>
+
+                    <!-- Game Over Screen -->
+                    <div id="gameOverScreen" class="ui-layer hidden">
+                        <h1 style="color: red">GAME OVER</h1>
+                        <p>Score: <span id="finalScore">0</span></p>
+                        <button class="btn" id="restartBtn">TRY AGAIN</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decorative Controls -->
+            <div class="control-panel">
+                <div class="joystick-deco"></div>
+                <div style="color: #555; font-size: 10px;">HIGH SCORE: 99999</div>
+                <div class="buttons-deco">
+                    <div class="arcade-btn blue-btn"></div>
+                    <div class="arcade-btn red-btn"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END GAME SECTION -->
 
     <footer>
         <p>META MART INTERGALACTIC INC.</p>
         <p>NOT FINANCIAL ADVICE. SIDE EFFECTS INCLUDE DIAMOND HANDS.</p>
     </footer>
 
+    <!-- PRODUCT PAGE SCRIPT -->
     <script>
-        // Simple script to copy address to clipboard without native alerts
         function copyToClipboard(text, element) {
             navigator.clipboard.writeText(text).then(() => {
                 const originalText = element.innerText;
-                
-                // Visual feedback
                 element.style.background = "var(--neon-green)";
                 element.style.color = "#000";
                 element.innerText = "COPIED TO CLIPBOARD!";
                 element.style.fontWeight = "bold";
 
-                // Revert after 2 seconds
                 setTimeout(() => {
                     element.innerText = originalText;
                     element.style.background = "rgba(0, 0, 0, 0.6)";
@@ -367,6 +618,405 @@
                 console.error('Failed to copy: ', err);
             });
         }
+    </script>
+
+    <!-- GAME SCRIPT (Wrapped to prevent scope pollution) -->
+    <script>
+    (function() {
+        const AudioSys = {
+            ctx: null,
+            init: function() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            },
+            playTone: function(freq, type, duration, vol = 0.1) {
+                if (!this.ctx) return;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                gain.gain.setValueAtTime(vol, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + duration);
+            },
+            playJump: function() { this.playTone(300, 'square', 0.15, 0.1); },
+            playCollect: function() { 
+                this.playTone(1200, 'sine', 0.1, 0.1); 
+                setTimeout(() => this.playTone(1800, 'sine', 0.2, 0.1), 50);
+            },
+            playCrash: function() { this.playTone(100, 'sawtooth', 0.4, 0.2); }
+        };
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('scoreVal');
+        const finalScoreEl = document.getElementById('finalScore');
+        const startScreen = document.getElementById('startScreen');
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        const startBtn = document.getElementById('startBtn');
+        const restartBtn = document.getElementById('restartBtn');
+
+        let gameId = null;
+        let frames = 0;
+        let score = 0;
+        let gameSpeed = 5;
+        let isGameOver = false;
+        let isPlaying = false;
+
+        const GROUND_Y = 300; 
+        const GRAVITY = 0.6;
+        const JUMP_FORCE = -12;
+        
+        class Rhino {
+            constructor() {
+                this.w = 50;  
+                this.h = 50;  
+                this.x = 50;
+                this.y = GROUND_Y - this.h;
+                this.dy = 0;
+                this.grounded = true;
+            }
+
+            jump() {
+                if (this.grounded) {
+                    this.dy = JUMP_FORCE;
+                    this.grounded = false;
+                    AudioSys.playJump();
+                    createParticles(this.x + this.w/2, this.y + this.h, 5, '#fff');
+                }
+            }
+
+            update() {
+                this.dy += GRAVITY;
+                this.y += this.dy;
+
+                if (this.y + this.h > GROUND_Y) {
+                    this.y = GROUND_Y - this.h;
+                    this.dy = 0;
+                    this.grounded = true;
+                } else {
+                    this.grounded = false;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                let cx = this.x + this.w / 2;
+                let cy = this.y + this.h / 2;
+                let scaleX = 1;
+                let scaleY = 1;
+                let rotation = 0;
+
+                if (!this.grounded) {
+                    scaleX = 0.9;
+                    scaleY = 1.1;
+                    rotation = -0.1; 
+                } else {
+                    cy += Math.sin(frames * 0.3) * 3;
+                }
+
+                ctx.translate(cx, cy);
+                ctx.scale(-scaleX, scaleY); 
+                ctx.rotate(rotation);
+                ctx.filter = "sepia(1) saturate(5) hue-rotate(190deg)"; 
+                ctx.font = "45px 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText("🦏", 0, 0);
+                ctx.filter = "none";
+                ctx.strokeStyle = '#00ffff'; 
+                ctx.lineWidth = 2;
+                ctx.lineJoin = 'round';
+                ctx.strokeText("🦏", 0, 0);
+                ctx.restore();
+            }
+        }
+
+        class Obstacle {
+            constructor() {
+                this.w = 40;
+                this.h = 40;
+                this.x = canvas.width;
+                this.y = GROUND_Y - this.h;
+                this.markedForDeletion = false;
+            }
+
+            update() {
+                this.x -= gameSpeed;
+                if (this.x + this.w < 0) this.markedForDeletion = true;
+            }
+
+            draw() {
+                ctx.fillStyle = '#ef4444'; 
+                ctx.fillRect(this.x, this.y, this.w, this.h);
+                ctx.strokeStyle = '#7f1d1d';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(this.x, this.y, this.w, this.h);
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x + this.w, this.y + this.h);
+                ctx.moveTo(this.x + this.w, this.y);
+                ctx.lineTo(this.x, this.y + this.h);
+                ctx.stroke();
+            }
+        }
+
+        class Diamond {
+            constructor() {
+                this.size = 30;
+                this.x = canvas.width;
+                const isHigh = Math.random() > 0.5;
+                this.y = isHigh ? GROUND_Y - 90 : GROUND_Y - 50; 
+                this.markedForDeletion = false;
+                this.oscillation = Math.random() * Math.PI;
+            }
+
+            update() {
+                this.x -= gameSpeed;
+                this.y += Math.sin(frames * 0.1 + this.oscillation) * 0.5;
+                if (this.x + this.size < 0) this.markedForDeletion = true;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x + this.size/2, this.y + this.size/2);
+                ctx.rotate(frames * 0.05);
+                ctx.font = "25px sans-serif";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText("🔷", 0, 0);
+                ctx.restore();
+            }
+        }
+
+        class Building {
+            constructor(x) {
+                this.w = 50 + Math.random() * 60; 
+                this.h = 80 + Math.random() * 120; 
+                this.x = x;
+                this.y = GROUND_Y - this.h;
+                this.color = Math.random() > 0.8 ? '#1a1a2e' : '#161625'; 
+                this.windows = [];
+                let rows = Math.floor(this.h / 15);
+                let cols = Math.floor(this.w / 15);
+                for(let r=0; r<rows; r++) {
+                    for(let c=0; c<cols; c++) {
+                        if(Math.random() < 0.3) {
+                            this.windows.push({
+                                x: c * 15 + 4,
+                                y: r * 15 + 4,
+                                w: 6,
+                                h: 8,
+                                color: Math.random() > 0.5 ? '#facc15' : '#fef08a' 
+                            });
+                        }
+                    }
+                }
+                this.markedForDeletion = false;
+            }
+
+            update() {
+                this.x -= gameSpeed * 0.2; 
+                if (this.x + this.w < 0) this.markedForDeletion = true;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.w, this.h);
+                this.windows.forEach(win => {
+                    ctx.fillStyle = win.color;
+                    if (Math.random() > 0.99) ctx.fillStyle = '#000';
+                    ctx.fillRect(this.x + win.x, this.y + win.y, win.w, win.h);
+                });
+            }
+        }
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 2;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 - 1;
+                this.color = color;
+                this.life = 1; 
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= 0.05;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.life;
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        let rhino;
+        let obstacles = [];
+        let diamonds = [];
+        let particles = [];
+        let buildings = [];
+
+        function init() {
+            rhino = new Rhino();
+            obstacles = [];
+            diamonds = [];
+            particles = [];
+            buildings = [];
+            score = 0;
+            frames = 0;
+            gameSpeed = 5;
+            isGameOver = false;
+            scoreEl.innerText = score;
+            let currentX = 0;
+            while(currentX < canvas.width) {
+                let b = new Building(currentX);
+                buildings.push(b);
+                currentX += b.w;
+            }
+        }
+
+        function createParticles(x, y, count, color) {
+            for(let i=0; i<count; i++) {
+                particles.push(new Particle(x, y, color));
+            }
+        }
+
+        function spawnManager() {
+            if (frames % 120 === 0) { 
+                if (Math.random() < 0.7) {
+                    obstacles.push(new Obstacle());
+                }
+            }
+            if (frames % 90 === 0) {
+                if (Math.random() < 0.6) {
+                    diamonds.push(new Diamond());
+                }
+            }
+            let lastBuilding = buildings[buildings.length - 1];
+            if (lastBuilding.x + lastBuilding.w < canvas.width) {
+                let b = new Building(lastBuilding.x + lastBuilding.w);
+                buildings.push(b);
+            }
+        }
+
+        function checkCollisions() {
+            obstacles.forEach(obs => {
+                if (
+                    rhino.x < obs.x + obs.w &&
+                    rhino.x + rhino.w > obs.x &&
+                    rhino.y < obs.y + obs.h &&
+                    rhino.y + rhino.h > obs.y
+                ) {
+                    gameOver();
+                }
+            });
+            diamonds.forEach(dia => {
+                const pad = 5;
+                if (
+                    rhino.x + pad < dia.x + dia.size &&
+                    rhino.x + rhino.w - pad > dia.x &&
+                    rhino.y + pad < dia.y + dia.size &&
+                    rhino.y + rhino.h - pad > dia.y
+                ) {
+                    dia.markedForDeletion = true;
+                    score += 10;
+                    scoreEl.innerText = score;
+                    AudioSys.playCollect();
+                    createParticles(dia.x, dia.y, 10, '#00ffff');
+                }
+            });
+        }
+
+        function drawBackground() {
+            ctx.fillStyle = '#050510';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            buildings.forEach(b => b.draw());
+            ctx.fillStyle = '#0a0a0a';
+            ctx.fillRect(0, GROUND_Y, canvas.width, canvas.height - GROUND_Y);
+            ctx.strokeStyle = '#3b82f6'; 
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, GROUND_Y);
+            ctx.lineTo(canvas.width, GROUND_Y);
+            ctx.stroke();
+            let stripeWidth = 40;
+            let stripeOffset = (frames * gameSpeed) % (stripeWidth * 2);
+            ctx.fillStyle = 'rgba(59, 130, 246, 0.2)';
+            for (let x = -stripeOffset; x < canvas.width; x += stripeWidth * 2) {
+                ctx.fillRect(x, GROUND_Y, stripeWidth, canvas.height - GROUND_Y);
+            }
+        }
+
+        function animate() {
+            if (!isPlaying) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+            spawnManager();
+            rhino.update();
+            rhino.draw();
+            [...obstacles, ...diamonds].forEach(obj => obj.update());
+            [...obstacles, ...diamonds].forEach(obj => obj.draw());
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+                if (p.life <= 0) particles.splice(index, 1);
+            });
+            obstacles = obstacles.filter(o => !o.markedForDeletion);
+            diamonds = diamonds.filter(d => !d.markedForDeletion);
+            buildings = buildings.filter(b => !b.markedForDeletion);
+            checkCollisions();
+            if (!isGameOver) {
+                frames++;
+                if (frames % 600 === 0) gameSpeed += 0.5;
+                gameId = requestAnimationFrame(animate);
+            }
+        }
+
+        function startGame() {
+            AudioSys.init(); 
+            init();
+            isPlaying = true;
+            startScreen.classList.add('hidden');
+            gameOverScreen.classList.add('hidden');
+            animate();
+        }
+
+        function gameOver() {
+            isGameOver = true;
+            isPlaying = false;
+            cancelAnimationFrame(gameId);
+            AudioSys.playCrash();
+            finalScoreEl.innerText = score;
+            gameOverScreen.classList.remove('hidden');
+        }
+
+        function handleInput(e) {
+            if ((e.code === 'Space' || e.code === 'ArrowUp') && isPlaying && !isGameOver) {
+                rhino.jump();
+            }
+        }
+
+        window.addEventListener('keydown', handleInput);
+        canvas.addEventListener('mousedown', () => {
+             if (isPlaying && !isGameOver) rhino.jump();
+        });
+        canvas.addEventListener('touchstart', (e) => {
+             e.preventDefault(); 
+             if (isPlaying && !isGameOver) rhino.jump();
+        }, {passive: false});
+
+        startBtn.addEventListener('click', startGame);
+        restartBtn.addEventListener('click', startGame);
+
+    })();
     </script>
 </body>
 </html>
